@@ -1,0 +1,127 @@
+<html>
+<head>
+    <title>
+        Quotation Form
+    </title>
+</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="jqueryUI/jquery-ui.css">
+<link rel="stylesheet" href="jqueryUI/jquery-ui.structure.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="jqueryUI/jquery-ui.theme.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script src="jqueryUI/jquery-ui.js"></script>
+<style>
+    .container {
+        max-width: 60%;
+
+        padding: 25px;
+        border: 2px solid black;
+        border-radius: 10px;
+
+    }
+
+    h2 {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h2>Generate Quotation</h3>
+            <form action="form.php" method="post">
+                <div class="form-row">
+                    <div class="form-row col-md-9">
+                        <label for="QuotationDate">Quotation date:</label>
+                        <input type="date" class="form-control col-md-6" id="QuotationDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-row col-md-9">
+                        <label for="QuotationTo">Quotation To:</label>
+                        <input type="text" class="form-control col-md-6" id="QuotationDate" placeholder="Enter Text">
+                    </div>
+                </div>
+                Table Container
+                <table class="form-table table" id="customFields">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sl.no</th>
+                            <th scope="col">Service</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr valign="top">
+                            <th scope="row"><label for="customFieldName">1</label></th>
+                            <td><input type="text" class="form-control" name="service" id="serviceName" class="code"
+                                    value="" placeholder="Service Name" /> &nbsp;</td>
+                            <td><input type="text" class="form-control" name="unit" id="unit" class="code" value=""
+                                    placeholder="Unit" /> &nbsp;</td>
+                            <td><input type="number" class="form-control" name="price" class="code" value=""
+                                    placeholder="Price" /> &nbsp;</td>
+                            <td> <a href="#" class="addCF">&dtrif;</a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+                 Scope of work
+                <div class="form-group col-md-12 field_wrapper" id="dynamic">
+                    <div class="row">
+                        <label for="Scope" class="col-md-6">Scope Of Work</label>
+                        <input type="text" class="form-control" name="scope" value=""
+                            placeholder="Scope of work to be added" />
+                        <a href="javascript:void(0);" class="add_button col-md-1" title="Add field">Add</a>
+                    </div>
+                </div>
+                 regards container 
+                <h4>Regards</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><input type="radio" name="name" value="Director">
+                            <p> Mohit Chatwal<br> Director Marketing <br>9392612314</p>
+                        </label>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label><input type="radio" name="name" value="MD">
+                            <p>K.Anand <br> Managing Director <br> 9392612317</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn btn-success" type="submit" name="submit">Generate</button>
+                </div>
+            </form>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        var i = 2;
+        $('.add').click(function () {
+            $('#dynamic').append('<input type="text" class="form-control col-md-10"><a class="col-md-1" href="#" class="removeScope">&dtrif;</a>');
+        });
+        $(".addCF").click(function () {
+            $("#customFields").append('<tr valign="top"><th scope="row"><label for="customFieldName">' + i + '</label></th><td><input type="text" class="form-control" class="code" name="service[]" value="" placeholder="Service" /> &nbsp;</td><td><input type="text" class="form-control" class="code" name="unit[]" value="" placeholder="Unit" /> &nbsp;</td><td><input type="number" class="form-control" class="code" name="price[]" value="" placeholder="Price" /> &nbsp;</td><td><a href="javascript:void(0);" class="remCF">&utrif;</a></td></tr>');
+            i++;
+        });
+
+        $("#customFields").on('click', '.remCF', function () {
+            $(this).parent().parent().remove();
+        });
+        $(document).ready(function () {
+            $('.add_button').click(function () {
+                $('#dynamic').append('<div class="row"><input class="col-md-10 mb-2 form-control" type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button col-md-1">Remove</a></div>');
+            });
+            $("#dynamic").on('click', '.remove_button', function () {
+                $(this).parent().remove();
+            });
+        });
+    });
+</script>
+
+</html> 
